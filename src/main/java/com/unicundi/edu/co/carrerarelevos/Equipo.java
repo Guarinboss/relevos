@@ -20,11 +20,15 @@ public class Equipo {
        posición y el nombre de cada equipo.
     */
     private String nombreEquipo;
+    
     private int posicion1;
+    
     private int posicion2;
+    
     private int posicion3;
 
     public Equipo() {
+        
     }
     /*
     * constructtor de el equipo donde se incicializa la 
@@ -33,10 +37,35 @@ public class Equipo {
         
     public Equipo(String nombreEqui) {
         this.nombreEquipo = nombreEqui;
-        this.posicion1=0;
-        this.posicion2=33;
-        this.posicion3=66;
+        this.posicion1 = 0;
+        this.posicion2 = 33;
+        this.posicion3 = 66;
     }
+    
+    /*
+    *metodo tipo synchronized String donde se imprimen los puestos
+     por color.
+    */
+    public synchronized String imprimirPuesto() {
+        String puesto = "";
+        int contador = 0;
+        puesto =  nombreEquipo;  
+        
+        for (int i = 0; i <= 100; i++) {
+            if (i == posicion1) {
+                puesto += "O";
+            } else if (i == posicion2) {
+                puesto += "D";
+            } else if (i == posicion3) {
+                puesto += "+";
+            } else {
+                puesto += "_";
+            }
+            //Runtime.getRuntime().exec("cls");
+        } 
+        return puesto;
+    }
+    
     /*
     * creación de getters y setters de cada variable.
     */
@@ -70,35 +99,6 @@ public class Equipo {
 
     public void setPosicion3(int posicion3) {
         this.posicion3 = posicion3;
-    }
-
-
-    /*
-    *metodo tipo synchronized String donde se imprimen los puestos
-     por color.
-    */
-    public synchronized String imprimirPuesto(){
-        String puesto="";  
-        int contador=0;
-        puesto =  nombreEquipo;  
-        
-        for (int i = 0; i <= 100; i++) {
-            if (i == posicion1) {
-                puesto += "O";
-                 
-            } else if (i == posicion2) {
-                puesto += "D";
-            } else if (i == posicion3) {
-                puesto += "+";
-            } else {
-                puesto += "_";
-            }
-           
-           
-          //  Runtime.getRuntime().exec("cls");
-        } 
-        return puesto;
-       
     }
     
 }

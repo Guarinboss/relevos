@@ -35,8 +35,6 @@ public class Principal {
         Corredor corredor8 = new Corredor(rojo, "Nacho", 33);
         Corredor corredor9 = new Corredor(rojo, "Stuart", 66);
 
-    
-
         corredor1.start();
         corredor2.start();
         corredor3.start();
@@ -46,7 +44,7 @@ public class Principal {
         corredor7.start();
         corredor8.start();
         corredor9.start();
-               
+        
     }
     
     public static void main(String[] args) {

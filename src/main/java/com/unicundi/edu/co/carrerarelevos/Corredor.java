@@ -5,6 +5,9 @@
  */
 package com.unicundi.edu.co.carrerarelevos;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dparr
@@ -12,53 +15,57 @@ package com.unicundi.edu.co.carrerarelevos;
 public class Corredor extends Thread {
 
     private Equipo equipo;
+    
     private String nombreEquipo;
-    private int posiciondeInicio;
+    
+    private int posicionInicial;
+    
     private String equipo1;
+    
     private String equipo2;
+    
     private String equipo3;
 
-    public Corredor(Equipo equipo, String nombreEquipo, int posiciondeInicio ) {
-        this.nombreEquipo = nombreEquipo;
-        this.posiciondeInicio = posiciondeInicio;
+    public Corredor(Equipo equipo, String nombreEquipo, int posicionInicial) {
         this.equipo = equipo;
+        this.nombreEquipo = nombreEquipo;
+        this.posicionInicial = posicionInicial;
     }
 
     @Override
-
     public void run() {
-        if (getPosiciondeInicio() == 0) {
-            avanzaCorredor1();
+        if (getPosicionInicial() == 0) {
+            arrancar1();
         } else {
             esperar();
         }
-        if (getPosiciondeInicio() == 33) {
-            avanzaCorredor2();
+        if (getPosicionInicial() == 33) {
+            arrancar2();
         } else {
             esperar();
         }
-        if (getPosiciondeInicio() == 66) {
-            avanzaCorredor3();
+        if (getPosicionInicial() == 66) {
+            arrancar3();
         } else {
             esperar();
         }
     }
 
-    public void avanzaCorredor1() {
+    public void arrancar1() {
         while (true) {
             int posicion = correr(1);
             if (posicion >= 33) {
                 getEquipo().setPosicion1(33);
                 synchronized (getEquipo()) {
                     getEquipo().notifyAll();
-                    setPosiciondeInicio(33);
+                    setPosicionInicial(33);
                 }
                 break;
             }
         }
     }
 
-    public void avanzaCorredor2() {
+    public void arrancar2() {
         while (true) {
             int posicion = correr(2);
             if (posicion >= 66) {
@@ -71,7 +78,7 @@ public class Corredor extends Thread {
         }
     }
 
-    public String avanzaCorredor3() {
+    public String arrancar3() {
         while (true) {
             int posicion = correr(3);
             if (posicion >= 100) {
@@ -97,41 +104,34 @@ public class Corredor extends Thread {
             try {
                 getEquipo().wait();
             } catch (InterruptedException ex) {
-                ex.getMessage();
-                System.out.println("Error en Metodo Esperar");
+                Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public int correr(int corre) {
+    public int correr(int corredor) {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
-            ex.getMessage();
-            System.out.println("Error en el Metodo Correr");
+            Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int numRam = generarNumeroRandom();
-        if (corre == 1) {
+        int numRam = (int) (Math.random() * 3 + 1);
+        if (corredor == 1) {
             getEquipo().setPosicion1(getEquipo().getPosicion1() + numRam);
             mostrarEquipo();
             return getEquipo().getPosicion1();
         }
-        if (corre == 2) {
+        if (corredor == 2) {
             getEquipo().setPosicion2(getEquipo().getPosicion2() + numRam);
             mostrarEquipo();
             return getEquipo().getPosicion2();
         }
-        if (corre == 3) {
+        if (corredor == 3) {
             getEquipo().setPosicion3(getEquipo().getPosicion3() + numRam);
             mostrarEquipo();
             return getEquipo().getPosicion3();
         }
         return 0;
-    }
-    
-    public static int generarNumeroRandom(){
-        int numero = (int) (Math.random() * 3 + 1);
-        return numero;
     }
 
     public void mostrarEquipo() {
@@ -186,15 +186,15 @@ public class Corredor extends Thread {
     /**
      * @return the posiciondeInicio
      */
-    public int getPosiciondeInicio() {
-        return posiciondeInicio;
+    public int getPosicionInicial() {
+        return posicionInicial;
     }
 
     /**
-     * @param posiciondeInicio the posiciondeInicio to set
+     * @param posicionInicial the posiciondeInicio to set
      */
-    public void setPosiciondeInicio(int posiciondeInicio) {
-        this.posiciondeInicio = posiciondeInicio;
+    public void setPosicionInicial(int posicionInicial) {
+        this.posicionInicial = posicionInicial;
     }
 
     /**
