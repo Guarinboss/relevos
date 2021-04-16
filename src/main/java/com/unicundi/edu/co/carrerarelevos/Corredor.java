@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author dparr
  */
 public class Corredor extends Thread {
-
+    
     private Equipo equipo;
     
     private String nombreEquipo;

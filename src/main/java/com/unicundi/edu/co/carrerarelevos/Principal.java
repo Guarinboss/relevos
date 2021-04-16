@@ -10,15 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase encargada de inicializar los corredores "hilos" de cada equipo,
+ * simulando una carrera de relevos.
  *
- * @author cenef
+ * @author Alejandro Cuaran
+ * @author David Parrado
+ * @version 1.0.0
+ * @since Netbeans IDE 12.2, JDK 1.8.0_281
  */
 public class Principal {
 
+    /**
+     * Constructor de la clase el cual inicaliza o hace llamado al método
+     * que realiza la función de simular la carrera de relevos.
+     */
     public Principal() {
         iniciarCarrera();
     }
     
+    /**
+     * Método que crea los equipos asignándole un nombre, ademas de crear los
+     * corredores (hilos) los cuales se asignan a cada equipo, dándoles tanto
+     * nombre como posición en la que se encuentra; finalmente se arranca
+     * cada corredor.
+     */
     public void iniciarCarrera() {
         
         Equipo azul =  new Equipo("Equipo1");
@@ -46,7 +61,10 @@ public class Principal {
         corredor9.start();
         
     }
-    
+    /**
+     * Metodo que ejecuta un objeto de la clase Principal
+     * @param args 
+     */
     public static void main(String[] args) {
         new Principal();
     }

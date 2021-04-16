@@ -10,26 +10,37 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase encargada de inicializar tanto el nombre del equipo como los puestos 
+ * que ocupará cada corredor por equipo para así realizar la simulación de la 
+ * carrera.
  *
- * @author dparr
+ * @author Alejandro Cuaran
+ * @author David Parrado
+ * @version 1.0.0
+ * @since Netbeans IDE 12.2, JDK 1.8.0_281
  */
 public class Equipo {
    
-   /*
-    * inicializacion de variables donde se va guardar cada
-       posición y el nombre de cada equipo.
+   /**
+    * Variable que indica el nombre del equipo.
     */
     private String nombreEquipo;
     
+    /**
+     * Variable que incida la posición para el primer corredor de cada equipo.
+     */
     private int posicion1;
     
+    /**
+     * Variable que incida la posición para el segundo corredor de cada equipo.
+     */
     private int posicion2;
     
+    /**
+     * Variable que incida la posición para el tercer corredor de cada equipo.
+     */
     private int posicion3;
-
-    public Equipo() {
-        
-    }
+    
     /*
     * constructtor de el equipo donde se incicializa la 
       posición de cada jugador.
