@@ -39,15 +39,15 @@ public class Principal {
         Equipo rojo =  new Equipo("Equipo2");
         Equipo verde =  new Equipo("Equipo3");
 
-        Corredor corredor1 = new Corredor(azul, "Juan", 0);
-        Corredor corredor2 = new Corredor(azul, "David", 33);
-        Corredor corredor3 = new Corredor(azul, "Camilo", 66);
-        Corredor corredor4 = new Corredor(verde, "John", 0);
-        Corredor corredor5 = new Corredor(verde, "Johans", 33);
-        Corredor corredor6 = new Corredor(verde, "Sebastian", 66);
-        Corredor corredor7 = new Corredor(rojo, "Marco", 0);
-        Corredor corredor8 = new Corredor(rojo, "Nacho", 33);
-        Corredor corredor9 = new Corredor(rojo, "Stuart", 66);
+        Corredor corredor1 = new Corredor(azul, 0);
+        Corredor corredor2 = new Corredor(azul, 33);
+        Corredor corredor3 = new Corredor(azul, 66);
+        Corredor corredor4 = new Corredor(verde, 0);
+        Corredor corredor5 = new Corredor(verde, 33);
+        Corredor corredor6 = new Corredor(verde, 66);
+        Corredor corredor7 = new Corredor(rojo, 0);
+        Corredor corredor8 = new Corredor(rojo, 33);
+        Corredor corredor9 = new Corredor(rojo, 66);
 
         corredor1.start();
         corredor2.start();

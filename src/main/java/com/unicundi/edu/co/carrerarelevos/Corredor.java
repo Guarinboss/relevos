@@ -24,12 +24,7 @@ public class Corredor extends Thread {
      * Variable que indica el equipo del corredor.
      */
     private Equipo equipo;
-    
-    /**
-     * Variable que indica el nombre del equipo para el corredor.
-     */
-    private String nombreEquipo;
-    
+     
     /**
      * Variable que indica la posición inicial del corredor.
      */
@@ -56,38 +51,15 @@ public class Corredor extends Thread {
      * asigado en la clase Principal.
      * 
      * @param equipo recibe como parámetro el equipo del corredor.
-     * @param nombreEquipo recibe como parámetro el nombre del equipo.
      * @param posicionInicial recibe como parámetro la posición inicial del 
      * corredor.
      */
-    public Corredor(Equipo equipo, String nombreEquipo, int posicionInicial) {
+    public Corredor(Equipo equipo, int posicionInicial) {
         this.equipo = equipo;
-        this.nombreEquipo = nombreEquipo;
         this.posicionInicial = posicionInicial;
     }
 
-    /**
-     * Método que sobrescribe el método original "run" de la clase "Thread" el
-     * cual correrá los métodos que inicializarán la simulación de la carrera.
-     */
-    @Override
-    public void run() {
-        if (getPosicionInicial() == 0) {
-            arrancar1();
-        } else {
-            esperar();
-        }
-        if (getPosicionInicial() == 33) {
-            arrancar2();
-        } else {
-            esperar();
-        }
-        if (getPosicionInicial() == 66) {
-            arrancar3();
-        } else {
-            esperar();
-        }
-    }
+   
 
     /**
      * Método que arrancará al corredor 1 de cada equipo y llegará hasta la
@@ -95,8 +67,7 @@ public class Corredor extends Thread {
      */
     public void arrancar1() {
         while (true) {
-            int posicion = correr(1);
-            if (posicion >= 33) {
+            if (correr(1) >= 33) {
                 getEquipo().setPosicion1(33);
                 synchronized (getEquipo()) {
                     getEquipo().notifyAll();
@@ -113,8 +84,7 @@ public class Corredor extends Thread {
      */
     public void arrancar2() {
         while (true) {
-            int posicion = correr(2);
-            if (posicion >= 66) {
+            if (correr(2) >= 66) {
                 getEquipo().setPosicion2(66);
                 synchronized (getEquipo()) {
                     getEquipo().notify();
@@ -130,8 +100,7 @@ public class Corredor extends Thread {
      */
     public String arrancar3() {
         while (true) {
-            int posicion = correr(3);
-            if (posicion >= 100) {
+            if (correr(3) >= 100) {
                 getEquipo().setPosicion3(100);
                 if (getEquipo().getNombreEquipo().equals("Equipo1")) {
                     getEquipo().setNombreEquipo("Equipo 1 (azul)");
@@ -176,19 +145,19 @@ public class Corredor extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int numRam = (int) (Math.random() * 3 + 1);
+        int ramdon = (int) (Math.random() * 3 + 1);
         if (corredor == 1) {
-            getEquipo().setPosicion1(getEquipo().getPosicion1() + numRam);
+            getEquipo().setPosicion1(getEquipo().getPosicion1() + ramdon);
             mostrarEquipo();
             return getEquipo().getPosicion1();
         }
         if (corredor == 2) {
-            getEquipo().setPosicion2(getEquipo().getPosicion2() + numRam);
+            getEquipo().setPosicion2(getEquipo().getPosicion2() + ramdon);
             mostrarEquipo();
             return getEquipo().getPosicion2();
         }
         if (corredor == 3) {
-            getEquipo().setPosicion3(getEquipo().getPosicion3() + numRam);
+            getEquipo().setPosicion3(getEquipo().getPosicion3() + ramdon);
             mostrarEquipo();
             return getEquipo().getPosicion3();
         }
@@ -218,6 +187,29 @@ public class Corredor extends Thread {
             }
         }
     }
+    
+     /**
+     * Método que sobrescribe el método original "run" de la clase "Thread" el
+     * cual correrá los métodos que inicializarán la simulación de la carrera.
+     */
+    @Override
+    public void run() {
+        if (getPosicionInicial() == 0) {
+            arrancar1();
+        } else {
+            esperar();
+        }
+        if (getPosicionInicial() == 33) {
+            arrancar2();
+        } else {
+            esperar();
+        }
+        if (getPosicionInicial() == 66) {
+            arrancar3();
+        } else {
+            esperar();
+        }
+    }
 
     /**
      * Método que retorna el equipo del corredor.
@@ -235,24 +227,6 @@ public class Corredor extends Thread {
      */
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
-    }
-
-    /**
-     * Método que retorna el nombre del equipo del corredor.
-     * 
-     * @return el nombre del equipo del corredor.
-     */
-    public String getNombreEquipo() {
-        return nombreEquipo;
-    }
-
-    /**
-     * Método que recibe el nombre del equipo del corredor.
-     * 
-     * @param nombreEquipo recibe como parámetro el nombre del equipo del corredor.
-     */
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
     }
 
     /**

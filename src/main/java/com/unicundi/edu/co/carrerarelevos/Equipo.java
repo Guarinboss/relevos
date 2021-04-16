@@ -73,7 +73,7 @@ public class Equipo {
             } else if (i == posicion3) {
                 puesto += "+";
             } else {
-                puesto += "_";
+                puesto += "__";
             }
         } 
         return puesto;
