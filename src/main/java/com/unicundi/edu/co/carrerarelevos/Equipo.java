@@ -54,32 +54,7 @@ public class Equipo {
         this.posicion3 = 66;
     }
     
-    /**
-     * Método sincronizado que imprime las posiciones de los corredores de
-     * cada equipo, simulando así la carrera.
-     * 
-     * @return retorna el puesto del corredor.
-     */
-    public synchronized String imprimirPuesto() {
-        String puesto = "";
-        int contador = 0;
-        puesto =  nombreEquipo;  
-        
-        for (int i = 0; i <= 100; i++) {
-            if (i == posicion1) {
-                puesto += "O";
-            } else if (i == posicion2) {
-                puesto += "D";
-            } else if (i == posicion3) {
-                puesto += "+";
-            } else {
-                puesto += "__";
-            }
-        } 
-        return puesto;
-    }
-    
-    
+
     /**
      * Método que retorna el nombre del equipo.
      * 

@@ -59,6 +59,47 @@ public class Corredor extends Thread {
         this.posicionInicial = posicionInicial;
     }
 
+    
+    /**
+     * Método que sobrescribe el método original "run" de la clase "Thread" el
+     * cual correrá los métodos que inicializarán la simulación de la carrera.
+     */
+    @Override
+    public void run() {
+        if (getPosicionInicial() == 0) {
+            arrancar1();
+        } else {
+            synchronized (getEquipo()) {
+            try {
+                getEquipo().wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if (getPosicionInicial() == 33) {
+            arrancar2();
+        } else {
+            synchronized (getEquipo()) {
+            try {
+                getEquipo().wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if (getPosicionInicial() == 66) {
+            arrancar3();
+        } else {
+            synchronized (getEquipo()) {
+            try {
+                getEquipo().wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
    
 
     /**
@@ -98,7 +139,7 @@ public class Corredor extends Thread {
      * Método que arrancará al corredor 3 de cada equipo y llegará hasta la
      * línea de meta.
      */
-    public String arrancar3() {
+    public void arrancar3() {
         while (true) {
             if (correr(3) >= 100) {
                 getEquipo().setPosicion3(100);
@@ -109,25 +150,9 @@ public class Corredor extends Thread {
                 } else if (getEquipo().getNombreEquipo().equals("Equipo3")) {
                     getEquipo().setNombreEquipo("Equipo 3 (Verde)");
                 }
-                String cadena = "El " + getEquipo().getNombreEquipo() + " Gana la carrera !!!";
                 System.out.println("El equipo ganador es: " + getEquipo().getNombreEquipo());
                 System.exit(0);
-                return cadena;
 
-            }
-        }
-    }
-
-    /**
-     * Método que hará esperar a los corredores 2 y 3 hasta que llegue el 
-     * corredor anterior a su posición.
-     */
-    public void esperar() {
-        synchronized (getEquipo()) {
-            try {
-                getEquipo().wait();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Corredor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -148,68 +173,71 @@ public class Corredor extends Thread {
         int ramdon = (int) (Math.random() * 3 + 1);
         if (corredor == 1) {
             getEquipo().setPosicion1(getEquipo().getPosicion1() + ramdon);
-            mostrarEquipo();
+            imprimirEquipo();
             return getEquipo().getPosicion1();
         }
         if (corredor == 2) {
             getEquipo().setPosicion2(getEquipo().getPosicion2() + ramdon);
-            mostrarEquipo();
+            imprimirEquipo();
             return getEquipo().getPosicion2();
         }
         if (corredor == 3) {
             getEquipo().setPosicion3(getEquipo().getPosicion3() + ramdon);
-            mostrarEquipo();
+            imprimirEquipo();
             return getEquipo().getPosicion3();
         }
         return 0;
+    }
+    
+     /**
+     * Método sincronizado que imprime las posiciones de los corredores de
+     * cada equipo, simulando así la carrera.
+     * 
+     * @return retorna el puesto del corredor.
+     */
+    public synchronized String imprimirCorredor() {
+        String puesto = "";
+        puesto =  equipo.getNombreEquipo();  
+        
+        for (int i = 0; i <= 100; i++) {
+            if (i == equipo.getPosicion1()) {
+                puesto += "O";
+            } else if (i == equipo.getPosicion2()) {
+                puesto += "D";
+            } else if (i == equipo.getPosicion3()) {
+                puesto += "+";
+            } else {
+                puesto += "__";
+            }
+        } 
+        return puesto;
     }
 
     /**
      * Método que imprimirá el puesto de cada corredor para la simulación
      * de la carrera.
      */
-    public void mostrarEquipo() {
+    public void imprimirEquipo() {
 
-        if (getEquipo().imprimirPuesto().contains("Equipo1")) {
-            setEquipo1(getEquipo().imprimirPuesto());
+        if (imprimirCorredor().contains("Equipo1")) {
+            setEquipo1(imprimirCorredor());
             if (getEquipo1() != null) {
                 System.out.println(getEquipo1());
             }
-        } else if (getEquipo().imprimirPuesto().contains("Equipo2")) {
-            setEquipo2(getEquipo().imprimirPuesto());
+        } else if (imprimirCorredor().contains("Equipo2")) {
+            setEquipo2(imprimirCorredor());
             if (getEquipo2() != null) {
                 System.out.println(getEquipo2());
             }
-        } else if (getEquipo().imprimirPuesto().contains("Equipo3")) {
-            setEquipo3(getEquipo().imprimirPuesto());
+        } else if (imprimirCorredor().contains("Equipo3")) {
+            setEquipo3(imprimirCorredor());
             if (getEquipo3() != null) {
                 System.out.println(getEquipo3());
             }
         }
     }
     
-     /**
-     * Método que sobrescribe el método original "run" de la clase "Thread" el
-     * cual correrá los métodos que inicializarán la simulación de la carrera.
-     */
-    @Override
-    public void run() {
-        if (getPosicionInicial() == 0) {
-            arrancar1();
-        } else {
-            esperar();
-        }
-        if (getPosicionInicial() == 33) {
-            arrancar2();
-        } else {
-            esperar();
-        }
-        if (getPosicionInicial() == 66) {
-            arrancar3();
-        } else {
-            esperar();
-        }
-    }
+     
 
     /**
      * Método que retorna el equipo del corredor.
