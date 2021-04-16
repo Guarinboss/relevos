@@ -35,7 +35,6 @@ public class Principal {
      * cada corredor.
      */
     public void iniciarCarrera() {
-        
         Equipo azul =  new Equipo("Equipo1");
         Equipo rojo =  new Equipo("Equipo2");
         Equipo verde =  new Equipo("Equipo3");
@@ -59,7 +58,6 @@ public class Principal {
         corredor7.start();
         corredor8.start();
         corredor9.start();
-        
     }
     /**
      * Metodo que ejecuta un objeto de la clase Principal

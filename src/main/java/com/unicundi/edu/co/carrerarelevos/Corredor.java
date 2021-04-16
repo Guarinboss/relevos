@@ -9,29 +9,67 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase que extiende de Thread, encargada de procesar la lógica para simular
+ * la carrera de relevos, esta simulará las acciones que tomarán los corredores
+ * de cada equipo, como lo son: "correr", "esperar" y "mostrar".
  *
- * @author dparr
+ * @author Alejandro Cuaran
+ * @author David Parrado
+ * @version 1.0.0
+ * @since Netbeans IDE 12.2, JDK 1.8.0_281
  */
 public class Corredor extends Thread {
     
+    /**
+     * Variable que indica el equipo del corredor.
+     */
     private Equipo equipo;
     
+    /**
+     * Variable que indica el nombre del equipo para el corredor.
+     */
     private String nombreEquipo;
     
+    /**
+     * Variable que indica la posición inicial del corredor.
+     */
     private int posicionInicial;
     
+    /**
+     * Variable que indica la posición actual del corredor 1.
+     */
     private String equipo1;
     
+    /**
+     * Variable que indica la posición actual del corredor 2.
+     */
     private String equipo2;
     
+    /**
+     * Variable que indica la posición actual del corredor 3.
+     */
     private String equipo3;
 
+    /**
+     * Constructor sobrecargado de la clase Corredor que recibe el equipo del
+     * corredor, el nombre del equipo y la posición inicial del corredor 
+     * asigado en la clase Principal.
+     * 
+     * @param equipo recibe como parámetro el equipo del corredor.
+     * @param nombreEquipo recibe como parámetro el nombre del equipo.
+     * @param posicionInicial recibe como parámetro la posición inicial del 
+     * corredor.
+     */
     public Corredor(Equipo equipo, String nombreEquipo, int posicionInicial) {
         this.equipo = equipo;
         this.nombreEquipo = nombreEquipo;
         this.posicionInicial = posicionInicial;
     }
 
+    /**
+     * Método que sobrescribe el método original "run" de la clase "Thread" el
+     * cual correrá los métodos que inicializarán la simulación de la carrera.
+     */
     @Override
     public void run() {
         if (getPosicionInicial() == 0) {
@@ -51,6 +89,10 @@ public class Corredor extends Thread {
         }
     }
 
+    /**
+     * Método que arrancará al corredor 1 de cada equipo y llegará hasta la
+     * posición del corredor 2.
+     */
     public void arrancar1() {
         while (true) {
             int posicion = correr(1);
@@ -65,6 +107,10 @@ public class Corredor extends Thread {
         }
     }
 
+    /**
+     * Método que arrancará al corredor 2 de cada equipo y llegará hasta la
+     * posición del corredor 3.
+     */
     public void arrancar2() {
         while (true) {
             int posicion = correr(2);
@@ -78,6 +124,10 @@ public class Corredor extends Thread {
         }
     }
 
+    /**
+     * Método que arrancará al corredor 3 de cada equipo y llegará hasta la
+     * línea de meta.
+     */
     public String arrancar3() {
         while (true) {
             int posicion = correr(3);
@@ -99,6 +149,10 @@ public class Corredor extends Thread {
         }
     }
 
+    /**
+     * Método que hará esperar a los corredores 2 y 3 hasta que llegue el 
+     * corredor anterior a su posición.
+     */
     public void esperar() {
         synchronized (getEquipo()) {
             try {
@@ -109,6 +163,13 @@ public class Corredor extends Thread {
         }
     }
 
+    /**
+     * Método que simulará los pasos que realizarán los corredores para simular
+     * la carrera.
+     * 
+     * @param corredor recibe como parámetro el corredor de cada equipo.
+     * @return retorna la posición avanzada por el corredor de cada equipo.
+     */
     public int correr(int corredor) {
         try {
             Thread.sleep(1000);
@@ -134,6 +195,10 @@ public class Corredor extends Thread {
         return 0;
     }
 
+    /**
+     * Método que imprimirá el puesto de cada corredor para la simulación
+     * de la carrera.
+     */
     public void mostrarEquipo() {
 
         if (getEquipo().imprimirPuesto().contains("Equipo1")) {
@@ -152,92 +217,114 @@ public class Corredor extends Thread {
                 System.out.println(getEquipo3());
             }
         }
-
     }
 
     /**
-     * @return the equipo
+     * Método que retorna el equipo del corredor.
+     * 
+     * @return el equipo del corredor.
      */
     public Equipo getEquipo() {
         return equipo;
     }
 
     /**
-     * @param equipo the equipo to set
+     * Método que recibe el equipo del corredor.
+     * 
+     * @param equipo recibe como parámetro el equipo del corredor.
      */
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
 
     /**
-     * @return the nombreEquipo
+     * Método que retorna el nombre del equipo del corredor.
+     * 
+     * @return el nombre del equipo del corredor.
      */
     public String getNombreEquipo() {
         return nombreEquipo;
     }
 
     /**
-     * @param nombreEquipo the nombreEquipo to set
+     * Método que recibe el nombre del equipo del corredor.
+     * 
+     * @param nombreEquipo recibe como parámetro el nombre del equipo del corredor.
      */
     public void setNombreEquipo(String nombreEquipo) {
         this.nombreEquipo = nombreEquipo;
     }
 
     /**
-     * @return the posiciondeInicio
+     * Método que retorna la posición inicial del corredor.
+     * 
+     * @return la posición inicial del corredor.
      */
     public int getPosicionInicial() {
         return posicionInicial;
     }
 
     /**
-     * @param posicionInicial the posiciondeInicio to set
+     * Método que recibe la posición inicial del corredor.
+     * 
+     * @param posicionInicial recibe como parámetro la posición inicial del corredor.
      */
     public void setPosicionInicial(int posicionInicial) {
         this.posicionInicial = posicionInicial;
     }
 
     /**
-     * @return the equipo1
+     * Método que retorna la posición actual del corredor 1.
+     * 
+     * @return retorna la posición actual del corredor 1.
      */
     public String getEquipo1() {
         return equipo1;
     }
 
     /**
-     * @param equipo1 the equipo1 to set
+     * Método que recibe la posición actual del corredor 1.
+     * 
+     * @param equipo1 recibe como parámetro la posición actual del corredor 1.
      */
     public void setEquipo1(String equipo1) {
         this.equipo1 = equipo1;
     }
 
     /**
-     * @return the equipo2
+     * Método que retorna la posición actual del corredor 2.
+     * 
+     * @return retorna la posición actual del corredor 2.
      */
     public String getEquipo2() {
         return equipo2;
     }
 
     /**
-     * @param equipo2 the equipo2 to set
+     * Método que recibe la posición actual del corredor 2.
+     * 
+     * @param equipo2 recibe como parámetro la posición actual del corredor 2.
      */
     public void setEquipo2(String equipo2) {
         this.equipo2 = equipo2;
     }
 
     /**
-     * @return the equipo3
+     * Método que retorna la posición actual del corredor 3.
+     * 
+     * @return retorna la posición actual del corredor 3.
      */
     public String getEquipo3() {
         return equipo3;
     }
 
     /**
-     * @param equipo3 the equipo3 to set
+     * Método que recibe la posición actual del corredor 3.
+     * 
+     * @param equipo3 recibe como parámetro la posición actual del corredor 3.
      */
     public void setEquipo3(String equipo3) {
         this.equipo3 = equipo3;
     }
-    
     
 }

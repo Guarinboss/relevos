@@ -41,11 +41,12 @@ public class Equipo {
      */
     private int posicion3;
     
-    /*
-    * constructtor de el equipo donde se incicializa la 
-      posición de cada jugador.
-    */
-        
+    /**
+     * Constructor sobrecargado de la clase Equipo que recibe el nombre del
+     * equipo asignado en la clase Principal.
+     * 
+     * @param nombreEqui recibe como parámetro el nombre del equipo.
+     */    
     public Equipo(String nombreEqui) {
         this.nombreEquipo = nombreEqui;
         this.posicion1 = 0;
@@ -53,10 +54,12 @@ public class Equipo {
         this.posicion3 = 66;
     }
     
-    /*
-    *metodo tipo synchronized String donde se imprimen los puestos
-     por color.
-    */
+    /**
+     * Método sincronizado que imprime las posiciones de los corredores de
+     * cada equipo, simulando así la carrera.
+     * 
+     * @return retorna el puesto del corredor.
+     */
     public synchronized String imprimirPuesto() {
         String puesto = "";
         int contador = 0;
@@ -72,42 +75,82 @@ public class Equipo {
             } else {
                 puesto += "_";
             }
-            //Runtime.getRuntime().exec("cls");
         } 
         return puesto;
     }
     
-    /*
-    * creación de getters y setters de cada variable.
-    */
+    
+    /**
+     * Método que retorna el nombre del equipo.
+     * 
+     * @return retorna el nombre del equipo.
+     */
     public String getNombreEquipo() {
         return nombreEquipo;
     }
 
+    /**
+     * Método que recibe el nombre del equipo.
+     * 
+     * @param nombreEquipo recibe como parámetro el nombre del equipo.
+     */
     public void setNombreEquipo(String nombreEquipo) {
         this.nombreEquipo = nombreEquipo;
     }
 
+    /**
+     * Método que retorna la posición del corredor 1 de cada equipo.
+     * 
+     * @return retorna la posición del corredor 1 de cada equipo.
+     */
     public int getPosicion1() {
         return posicion1;
     }
 
+    /**
+     * Método que recibe la posición del corredor 1 de cada equipo.
+     * 
+     * @param posicion1 recibe como parámetro la posición del corredor 1 de 
+     * cada equipo.
+     */
     public void setPosicion1(int posicion1) {
         this.posicion1 = posicion1;
     }
 
+    /**
+     * Método que retorna la posición del corredor 2 de cada equipo.
+     * 
+     * @return retorna la posición del corredor 2 de cada equipo.
+     */
     public int getPosicion2() {
         return posicion2;
     }
 
+    /**
+     * Método que recibe la posición del corredor 2 de cada equipo.
+     * 
+     * @param posicion2 recibe como parámetro la posición del corredor 2 de 
+     * cada equipo.
+     */
     public void setPosicion2(int posicion2) {
         this.posicion2 = posicion2;
     }
 
+    /**
+     * Método que retorna la posición del corredor 3 de cada equipo.
+     * 
+     * @return retorna la posición del corredor 3 de cada equipo.
+     */
     public int getPosicion3() {
         return posicion3;
     }
 
+    /**
+     * Método que recibe la posición del corredor 3 de cada equipo.
+     * 
+     * @param posicion3 recibe como parámetro la posición del corredor 3 de 
+     * cada equipo.
+     */
     public void setPosicion3(int posicion3) {
         this.posicion3 = posicion3;
     }
