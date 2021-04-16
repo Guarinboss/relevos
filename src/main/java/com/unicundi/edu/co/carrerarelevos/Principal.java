@@ -20,24 +20,33 @@ public class Principal {
     }
     
     public void iniciarCarrera() {
-        List<Corredor> equipo1 = new ArrayList<>();
-        List<Corredor> equipo2 = new ArrayList<>();
-        List<Corredor> equipo3 = new ArrayList<>();
         
-        for (int i = 1; i <= 3; i++) {
-            equipo1.add(new Corredor("Corredor " + i, "Rojo"));
-            equipo2.add(new Corredor("Corredor " + i, "Azul"));
-            equipo3.add(new Corredor("Corredor " + i, "Amarillo"));
-        }
-        
-        Equipo e1 = new Equipo(equipo1);
-        Equipo e2 = new Equipo(equipo2);
-        Equipo e3 = new Equipo(equipo3);
-        
-        e1.start();
-        e2.start();
-        e3.start();
-        
+        Equipo azul =  new Equipo("Equipo1");
+        Equipo rojo =  new Equipo("Equipo2");
+        Equipo verde =  new Equipo("Equipo3");
+
+        Corredor corredor1 = new Corredor(azul, "Juan", 0);
+        Corredor corredor2 = new Corredor(azul, "David", 33);
+        Corredor corredor3 = new Corredor(azul, "Camilo", 66);
+        Corredor corredor4 = new Corredor(verde, "John", 0);
+        Corredor corredor5 = new Corredor(verde, "Johans", 33);
+        Corredor corredor6 = new Corredor(verde, "Sebastian", 66);
+        Corredor corredor7 = new Corredor(rojo, "Marco", 0);
+        Corredor corredor8 = new Corredor(rojo, "Nacho", 33);
+        Corredor corredor9 = new Corredor(rojo, "Stuart", 66);
+
+    
+
+        corredor1.start();
+        corredor2.start();
+        corredor3.start();
+        corredor4.start();
+        corredor5.start();
+        corredor6.start();
+        corredor7.start();
+        corredor8.start();
+        corredor9.start();
+               
     }
     
     public static void main(String[] args) {
